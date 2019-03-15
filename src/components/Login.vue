@@ -11,10 +11,10 @@
                         </v-card-title>
                         <v-card-text>
                         <v-form>
-                            <v-text-field outline prepend-inner-icon="person" name="Username" label="Username" clearable></v-text-field>
-                            <v-text-field outline prepend-inner-icon="lock" name="Password" label="Password" type="password"></v-text-field>
+                            <v-text-field outline prepend-inner-icon="person" name="Username" label="Username" clearable primary></v-text-field>
+                            <v-text-field outline prepend-inner-icon="lock" name="Password" label="Password" type="password" primary></v-text-field>
                             <v-card-actions>
-                                <v-btn primary large block>Login</v-btn>
+                                <v-btn large block color="secondary">Login</v-btn>
                             </v-card-actions>
                         </v-form>
                         </v-card-text>
