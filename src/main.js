@@ -7,12 +7,12 @@ import Vuetify from 'vuetify'
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
   theme: {
-    primary: '#64dd17',
-    plight: '#9cff57',
-    pdark: '#1faa00',
-    secondary: '#76ff03',
-    slight: '#b0ff57',
-    sdark: '#32cb00',
+    primary: '#00c853',
+    plight: '#5efc82',
+    pdark: '#009624',
+    secondary: '#64dd17',
+    slight: '#9cff57',
+    sdark: '#1faa00',
     error: '#D50000'
   }
 })
