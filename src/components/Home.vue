@@ -15,30 +15,30 @@
       color="transparent"
     >
       <v-btn
-        color="primary"
+        color="secondary"
         flat
-        value="recent"
+        value="eventos"
       >
-        <span>Recent</span>
-        <v-icon>history</v-icon>
+        <span>Eventos</span>
+        <v-icon>today</v-icon>
       </v-btn>
 
       <v-btn
-        color="primary"
+        color="secondary"
         flat
-        value="favorites"
+        value="live"
       >
-        <span>Favorites</span>
-        <v-icon>favorite</v-icon>
+        <span>En vivo</span>
+        <v-icon>linked_camera</v-icon>
       </v-btn>
 
       <v-btn
-        color="primary"
+        color="secondary"
         flat
-        value="nearby"
+        value="estado"
       >
-        <span>Nearby</span>
-        <v-icon>place</v-icon>
+        <span>Estado</span>
+        <v-icon>wb_sunny</v-icon>
       </v-btn>
     </v-bottom-nav>
   </v-app>
