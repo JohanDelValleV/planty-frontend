@@ -1,21 +1,29 @@
 <template>
   <v-app>
-      <!-- <v-toolbar app color="primary">
-      <v-toolbar-title class="headline text-uppercase">
-        <span class="title">planty</span>
-      </v-toolbar-title>
+      <v-toolbar color="primary" app>
+      <v-toolbar-title>
+        <v-icon color="white">local_florist</v-icon>
+            <span class="titulo"><strong>planty</strong></span>
+        </v-toolbar-title>
       <v-spacer></v-spacer>
-    </v-toolbar> -->
-    <div class="headline text-xs-center pa-5">
+    </v-toolbar>
+    <div v-if="bottomNav === 'eventos'">
+      <Eventos/>
+    </div>
+    <div v-else-if="bottomNav === 'live'">
+      <Live/>
+    </div>
+    <div v-else>
+      <Estado/>
     </div>
     <v-bottom-nav
       :active.sync="bottomNav"
       :value="true"
-      absolute
-      color="transparent"
+      app
+      shift
     >
       <v-btn
-        color="secondary"
+        color="primary"
         flat
         value="eventos"
       >
@@ -24,7 +32,7 @@
       </v-btn>
 
       <v-btn
-        color="secondary"
+        color="primary"
         flat
         value="live"
       >
@@ -33,7 +41,7 @@
       </v-btn>
 
       <v-btn
-        color="secondary"
+        color="primary"
         flat
         value="estado"
       >
@@ -44,15 +52,25 @@
   </v-app>
 </template>
 <style>
-  .title{
-    color:"white"
+  .titulo{
+    font-family: 'Quicksand', Bold;
+    color: #FFFFFF;
+    font-size: 120%;
   }
 </style>
 <script>
+  import Live from './Live'
+  import Eventos from './Eventos'
+   import Estado from './Estado'
   export default {
+    components: {
+      Live,
+      Eventos,
+      Estado
+    },
     data () {
       return {
-        bottomNav: 'recent'
+        bottomNav: 'live'
       }
     }
   }

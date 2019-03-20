@@ -7,7 +7,9 @@
     </v-content>
   </v-app>
 </template>
-
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Quicksand');
+</style>
 <script>
 import Home from './components/Home'
 
