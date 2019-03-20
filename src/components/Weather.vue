@@ -13,7 +13,7 @@
                                     <div v-bind:location="location"> {{ location }} </div>
                                     <div v-bind:clima="clima"> {{ clima }} </div>
                                     <div v-bind:condition="condition"> {{ condition }} </div>
-                                    <div v-bind:humdity="humidity"> {{ humidity }} </div>
+                                    <div v-bind:humdity="humidity">Humidity: {{ humidity }}%</div>
                                 </div>
                             </v-card-title>
                         </v-flex>

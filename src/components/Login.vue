@@ -14,7 +14,7 @@
                             <v-text-field outline prepend-inner-icon="person" name="Username" label="Username" clearable primary></v-text-field>
                             <v-text-field outline prepend-inner-icon="lock" name="Password" label="Password" type="password" primary></v-text-field>
                             <v-card-actions>
-                                <v-btn large block color="secondary">Login</v-btn>
+                                <v-btn large block color="secondary" to="/home">Login</v-btn>
                             </v-card-actions>
                         </v-form>
                         </v-card-text>
