@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import './plugins/vuetify'
-import App from './components/Login.vue'
+import App from './components/Weather.vue'
 import Vuetify from 'vuetify'
 // import router from './router'
 

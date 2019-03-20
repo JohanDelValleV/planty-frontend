@@ -1,6 +1,6 @@
 import axios from 'axios'
 var city = "Tuxtla Gutierrez"
-const APPID = "705a1454a4467dcf16b6ba160ccb6b27";
+const key = "9610855f2b4e4577b5a15037192003";
 export const WEATHER = axios.create({
-    baseURL: `http://api.openweathermap.org/data/2.5/weather?q=`+city+`&APPID=`+APPID
+    baseURL: `https://api.apixu.com/v1/current.json?key=`+key+`&q=`+city
 })
