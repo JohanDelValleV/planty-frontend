@@ -1,27 +1,31 @@
 <template>
     <v-app>
         <div class="container">
-            <v-flex xs12 sm6 offset-sm3>
-                <v-card>
+            <v-flex  sm4 offset-sm8>
+                <v-card class="card">
                     <v-layout>
-                        <v-flex xs4 offset-xs>
-                            <v-img :src="img" height="110px" width="110px" contain></v-img>
-                        </v-flex>
-                        <v-flex xs7>
-                            <v-card-title primary-title>
-                                <div>
-                                    <div v-bind:location="location"> {{ location }} </div>
-                                    <div v-bind:clima="clima"> {{ clima }} </div>
-                                    <div v-bind:condition="condition"> {{ condition }} </div>
-                                    <div v-bind:humdity="humidity">Humidity: {{ humidity }}%</div>
+                        <div class="container">
+                            <div v-bind:location="location" class="location"> {{ location }} </div>
+                            <div v-bind:localTime="localTime" style="color:#878787; font-size:15px;"> {{ localTime }} </div>
+                            <div v-bind:condition="condition" style="color:#878787; font-size:15px;"> {{ condition }} </div>
+                            <div>
+                                <v-img :src="img" contain style="float:left;height:64px;width:64px"></v-img> 
+                                <div style="" class="clima-container" aria-level="3" role="heading">
+                                    <span v-bind:clima="clima" class="clima"> {{ clima }} </span>
+                                    <div style="float:left;font-size:16px;margin-top:6px;" color="#212121">
+                                        <span>°C</span>
+                                    </div>
                                 </div>
-                            </v-card-title>
-                        </v-flex>
+                            </div>
+                            <div class="data-weather">
+                                <div v-bind:humdity="humidity">Humedad: <span>{{humidity}}%.</span></div>
+                                <div v-bind:viento="viento">Viento a: <span>{{viento}} km/h.</span></div>
+                            </div>
+                        </div>
                     </v-layout>
-                    <v-card-actions>
-                        <v-btn flat color="orange" v-on:click="getWeather()">Reload</v-btn>
-                        <v-btn flat color="orange">Explore</v-btn>
-                    </v-card-actions>
+                    <!-- <v-card-actions>
+                        <v-btn flat color="orange" @click="getWeather()">Reload</v-btn>
+                    </v-card-actions> -->
                 </v-card>
             </v-flex>
         </div>
@@ -32,57 +36,101 @@
     import { WEATHER } from '../services/weather';
     export default {
         name: 'Weather',
-        props: {
-            
-        },
         data: () => ({
             clima: String,
             location: String,
             img: String,
             humidity: String,
             condition: String,
-
+            localTime: String,
+            viento: String,
         }),
         methods: {
             getWeather(){
                 WEATHER.get().then(response => {
-                    this.clima = response.data.current.temp_c + ' °C';
-                });
-            },
-            getImgUrl(){
-                WEATHER.get().then(response => {
+                    this.clima = response.data.current.temp_c;
                     this.img = response.data.current.condition.icon;
+                    this.location = response.data.location.name + ', ' + response.data.location.region;
+                    this.humidity = response.data.current.humidity;
+                    this.condition = response.data.current.condition.text;
+                    this.localTime = response.data.location.localtime;
+                    this.viento = response.data.current.wind_kph;
                 });
             },
-            getLocation(){
-                WEATHER.get().then(response => {
-                    this.location = response.data.location.name + ', ' + response.data.location.region;
-                })
-            },
-            getHumidity(){
-                WEATHER.get().then(response => {
-                    this.humidity = response.data.current.humidity;
-                })
-            },
-            getCondition(){
-                WEATHER.get().then(response => {
-                    this.condition = response.data.current.condition.text;
-                })
-            }
         },
         mounted: function(){
-            WEATHER.get().then(response => {
-                console.log(response)
+            WEATHER.get().then(() => {
                 this.getWeather();
-                this.getLocation();
-                this.getImgUrl();
-                this.getHumidity();
-                this.getCondition();
             })
         }
     }
 </script>
 
 <style scoped>
-
+    .card {
+        border: 1px solid #dfe1e5;
+        border-radius: 8px;
+        box-shadow: none;
+    }
+    .clima-container {
+        padding-left: 10px;
+        float: left;
+        color: #212121 !important;
+    }
+    .location {
+        font-family: arial, sans-serif;
+        font-size: x-large;
+        color: #878787 !important;
+    }
+    .clima {
+        float: left;
+        margin-top: 2px;
+        font-size: 32px
+    }
+    .data-weather {
+        color: #878787 !important;
+        font-size: 15px;
+        padding-right: 30px;
+        line-height: 22px;
+        float: right;
+        margin-top: 2px;
+        padding-top: 2px;
+        min-width: 43%;
+    }
+    .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 </style>
