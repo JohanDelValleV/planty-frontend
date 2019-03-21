@@ -3,7 +3,9 @@
     <router-view/>
   </div>
 </template>
-
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Quicksand');
+</style>
 <script>
 
 export default {
