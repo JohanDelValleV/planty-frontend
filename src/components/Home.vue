@@ -7,14 +7,16 @@
         </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <div v-if="bottomNav === 'eventos'">
-      <Eventos/>
-    </div>
-    <div v-else-if="bottomNav === 'live'">
-      <Live/>
-    </div>
-    <div v-else>
-      <Estado/>
+    <div class="vista">
+        <div v-if="bottomNav === 'eventos'">
+          <Eventos/>
+        </div>
+        <div v-else-if="bottomNav === 'live'">
+          <Live/>
+        </div>
+        <div v-else>
+          <Estado/>
+        </div>
     </div>
     <v-bottom-nav
       :active.sync="bottomNav"
@@ -52,6 +54,9 @@
   </v-app>
 </template>
 <style>
+  .vista{
+    margin-top: 5%
+  }
   .titulo{
     font-family: 'Quicksand', Bold;
     color: #FFFFFF;
@@ -70,7 +75,7 @@
     },
     data () {
       return {
-        bottomNav: 'live'
+        bottomNav: 'eventos'
       }
     }
   }
