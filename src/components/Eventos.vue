@@ -5,7 +5,7 @@
                
                <v-dialog v-model="dialog" persistent>
                     <template v-slot:activator="{ on }">
-                        <div><v-btn round color="secondary" class="boton" dark v-on="on" >Crear evento <v-icon>add</v-icon></v-btn></div>
+                        <div><v-btn large round color="secondary" class="boton" dark v-on="on" >Crear evento<v-icon>add</v-icon></v-btn></div>
                     </template>
                         <v-card>
                             <v-container>
