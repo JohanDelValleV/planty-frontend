@@ -1,5 +1,20 @@
 <template>
     <v-app class="background">
+        <v-snackbar
+            v-model="snackbar"
+            :multi-line="mode === 'multi-line'"
+            :timeout="timeout"
+            :vertical="mode === 'vertical'"
+        >
+            {{ text }}
+            <v-btn
+            color="plight"
+            flat
+            @click="snackbar = false"
+            >
+            Cerrar
+            </v-btn>
+        </v-snackbar>   
         <div class="container">
             <v-flex xs12 sm8 offset-sm2>
                 <v-container style="position: relative;" class="text-xs-center">
@@ -12,10 +27,17 @@
                         </v-card-title>
                         <v-card-text>
                         <v-form>
-                            <v-text-field outline prepend-inner-icon="person" name="Username" label="Username" clearable primary></v-text-field>
-                            <v-text-field outline prepend-inner-icon="lock" name="Password" label="Password" type="password" primary></v-text-field>
+                            <v-text-field outline prepend-inner-icon="person" name="Username" label="Username" 
+                            v-model="username"
+                            :rules="[rules.username]"
+                            clearable primary></v-text-field>
+                            <v-text-field outline prepend-inner-icon="lock" name="Password" label="Password" type="password" 
+                            :rules="[rules.validatePassword]"
+                            v-model="password"
+                            @keyup.enter="login"
+                            primary></v-text-field>
                             <v-card-actions>
-                                <v-btn large depressed block dark color="primary" to="/home" class="button">Login</v-btn>
+                                <v-btn large depressed block dark color="primary" class="button" v-on:click="login()">Login</v-btn>
                             </v-card-actions>
                         </v-form>
                         </v-card-text>
@@ -28,6 +50,38 @@
 
 <script>
 export default {
+    data(){
+        return{
+            snackbar: false,
+            mode: '',
+            timeout: 6000,
+            text: 'Nombre de usuario y/o contraseña incorrecto.',
+            defaultUsername: 'planty',
+            defaultPassword: 'planty',
+            username: '',
+            password: '',
+            rules:{
+                username: value => !!value || 'Ingrese un nombre de usuario.'
+                ,
+                validatePassword: value => !!value || 'La contraseña no puede ser vacía.',
+            }
+        }
+    },
+    methods:{
+        login(){
+            if(this.username==this.defaultUsername){
+                if(this.password==this.defaultPassword){
+                    this.$router.replace('home')
+                }
+                else{
+                    this.snackbar=true;
+                }
+            }
+            else{
+                this.snackbar=true;
+            }
+        }
+    }
     
 }
 </script>
