@@ -27,13 +27,13 @@
 
 <script>
     import Ws from '@adonisjs/websocket-client';
-    import io from 'socket.io-client';
+    // import io from 'socket.io-client';
     import $ from 'jquery';
-    const ws = Ws('ws://localhost:3333');
+    const ws = Ws('ws://192.168.43.99:3333');
     export default {
         data() {
             return {
-                socket : io('LAPTOP-LESS:3001'),
+                // socket : io('LAPTOP-LESS:3001'),
                 snackbar: false,
                 y: 'bottom',
                 x: null,
@@ -52,8 +52,9 @@
                 this.riego = ws.subscribe('riego')
                 let riego = this.riego;
                 riego.on('ready', ()=> {
-                    this.riego.emit('message', 'Hola')
+                  riego.emit('riego', 'Hola')  
                 })
+                // this.riego.emit('riego', 'Hola')
             },
         },
         mounted(){
