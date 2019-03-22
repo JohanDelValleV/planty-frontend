@@ -8,7 +8,7 @@ Vue.config.productionTip = false
 Vue.use(Vuetify, {
   theme: {
     primary: '#00c853',
-    false: '#5efc82',
+    plight: '#5efc82',
     pdark: '#009624',
     secondary: '#64dd17',
     slight: '#9cff57',

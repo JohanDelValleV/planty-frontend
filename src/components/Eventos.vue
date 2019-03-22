@@ -65,6 +65,27 @@
               </v-slide-x-transition>
               </v-timeline>
            </div>
+          <div>
+            <v-snackbar
+              v-model="snackbar"
+              :bottom="y === 'bottom'"
+              :left="x === 'left'"
+              :multi-line="mode === 'multi-line'"
+              :right="x === 'right'"
+              :timeout="timeout"
+              :top="y === 'top'"
+              :vertical="mode === 'vertical'"
+            >
+              {{ text }}
+              <v-btn
+                color="plight"
+                flat
+                @click="snackbar = false"
+              >
+                Close
+              </v-btn>
+            </v-snackbar>
+          </div>
         </div>
   </v-app>
 </template>
@@ -85,8 +106,8 @@
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
     background-color: white; */
     margin-top: 2.5%;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 .contenedor-modal{
     display: flex;
@@ -107,6 +128,12 @@ import { API } from '../services/axios';
   export default {
     data () {
       return {
+        snackbar: false,
+        y: 'bottom',
+        x: null,
+        mode: '',
+        timeout: 6000,
+        text: 'Evento de riego agregado.',
         time: new Date().getHours().toString() +':'+new Date().getMinutes().toString(),
         date: new Date().toISOString().substr(0, 10),
         dialog: false,
@@ -121,9 +148,7 @@ import { API } from '../services/axios';
     },
     methods:{
         guardar(){
-          const tiempo = (new Date()).toTimeString().replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
-            return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
-          })
+          const tiempo = (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)","")
 
           API.post('evento/',{
             date: this.date,
@@ -132,6 +157,7 @@ import { API } from '../services/axios';
               this.dialog=false;
               API.get('evento/').then(response=>{
                 this.events=response.data.slice().reverse();
+                this.snackbar = true;
               });
           })
           
