@@ -42,20 +42,20 @@
             }
         },
         methods: {
-            // inicializeRiegows: async function(){
-               
-            // },
-        },
-         async mounted(){
-            // this.socket.on('stream', (image) => {
-            //    $('#play').attr('src',image);
-            // });
-             ws.connect();
+            inicializeRiegows: async function(){
+                ws.connect();
                 this.riego = ws.subscribe('riego')
                 let riego = this.riego;
                 riego.on('ready', ()=> {
                     this.riego.emit('riego', 'Hola')
                 })
+            },
+        },
+        mounted(){
+            // this.socket.on('stream', (image) => {
+            //    $('#play').attr('src',image);
+            // });
+            this.inicializeRiegows();
         }
     }
 </script>
