@@ -14,37 +14,38 @@
             >
             Cerrar
             </v-btn>
-        </v-snackbar>   
-        <div class="container">
-            <v-flex xs12 sm8 offset-sm2>
-                <v-container style="position: relative;" class="text-xs-center">
-                    <v-card max-height="auto" max-width="auto" class="borde">
-                        <v-card-title>
-                            <div>
-                                <v-icon color="primary">local_florist</v-icon>
-                                <span class="titulo"><strong>planty</strong></span>
-                            </div>
-                        </v-card-title>
-                        <v-card-text>
-                        <v-form>
-                            <v-text-field outline prepend-inner-icon="person" name="Username" label="Username" 
-                            v-model="username"
-                            :rules="[rules.username]"
-                            clearable primary></v-text-field>
-                            <v-text-field outline prepend-inner-icon="lock" name="Password" label="Password" type="password" 
-                            :rules="[rules.validatePassword]"
-                            v-model="password"
-                            @keyup.enter="login"
-                            primary></v-text-field>
-                            <v-card-actions>
-                                <v-btn large depressed block dark color="primary" class="button" v-on:click="login()">Login</v-btn>
-                            </v-card-actions>
-                        </v-form>
-                        </v-card-text>
-                    </v-card>
-                </v-container>
-            </v-flex>
-        </div>
+        </v-snackbar>
+            <v-container style="position: relative;" class="text-xs-center">
+                <v-card max-height="auto" max-width="auto" class="borde">
+                    <v-layout>
+                        <div class="container">
+                            <v-card-title>
+                                <div>
+                                    <v-icon color="primary" size="65px">local_florist</v-icon>
+                                    <span class="titulo"><strong>planty</strong></span>
+                                </div>
+                            </v-card-title>
+                            <v-card-text>
+                            <v-form>
+                                <v-text-field outline prepend-inner-icon="person" name="Username" label="Username" 
+                                v-model="username"
+                                :rules="[rules.username]"
+                                clearable primary></v-text-field>
+                                <v-text-field outline prepend-inner-icon="lock" name="Password" label="Password" type="password" 
+                                :rules="[rules.validatePassword]"
+                                v-model="password"
+                                @keyup.enter="login"
+                                autocomplete
+                                primary></v-text-field>
+                                <v-card-actions>
+                                    <v-btn large depressed block dark color="primary" class="button" v-on:click="login()">Login</v-btn>
+                                </v-card-actions>
+                            </v-form>
+                            </v-card-text>
+                        </div>
+                    </v-layout>
+                </v-card>
+            </v-container>
     </v-app>
 </template>
 

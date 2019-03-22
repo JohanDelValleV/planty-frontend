@@ -1,5 +1,5 @@
 <template>
-  <v-app id="eventos"> v-model="tabs"
+  <v-app id="eventos">
     <div id="lateral" href="#one">
       <v-dialog v-model="dialog" persistent>
           <template v-slot:activator="{ on }">
