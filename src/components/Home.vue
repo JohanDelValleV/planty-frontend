@@ -5,7 +5,18 @@
         <v-icon color="white">local_florist</v-icon>
             <span class="titulo"><strong>planty</strong></span>
         </v-toolbar-title>
-      <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn icon
+            v-on="on">
+              <v-icon  color="white">arrow_drop_down</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+              <v-btn flat v-on:click="salir()">Cerrar sesión</v-btn>
+          </v-list>
+        </v-menu>
     </v-toolbar>
     <div class="vista">
         <div v-if="bottomNav === 'eventos'">
@@ -79,6 +90,11 @@
     data () {
       return {
         bottomNav: 'eventos'
+      }
+    },
+    methods:{
+      salir(){
+        this.$router.replace('login')
       }
     }
   }
