@@ -12,7 +12,7 @@
           <Eventos/>
         </div>
         <div v-else-if="bottomNav === 'live'">
-          <Live/>
+          <Estado/>
         </div>
         <div v-else>
           <Weather/>
@@ -67,12 +67,14 @@
 <script>
   import Live from './Live'
   import Eventos from './Eventos'
-   import Weather from './Weather'
+  import Weather from './Weather'
+  import Estado from './Estado'
   export default {
     components: {
       Live,
       Eventos,
-      Weather
+      Weather,
+      Estado
     },
     data () {
       return {

@@ -7,8 +7,7 @@
                         <v-card-title>
                             <div>
                                 <v-icon color="primary">local_florist</v-icon>
-                                    <span class="titulo"><strong>planty</strong></span>
-                                </v-toolbar-title>
+                                <span class="titulo"><strong>planty</strong></span>
                             </div>
                         </v-card-title>
                         <v-card-text>
