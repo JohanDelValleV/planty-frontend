@@ -1,33 +1,173 @@
 <template>
-  <v-app>
-      <div>
-            <v-tabs
-            v-model="active"
-            color="cyan"
-            dark
-            slider-color="yellow"
-            >
-            <v-tab
-                v-for="n in 3"
-                :key="n"
-                ripple
-            >
-                Item {{ n }}
-
-            </v-tab>
-            <v-tab-item
-                v-for="n in 3"
-                :key="n"
-            >
-                <v-card flat>
-                <v-card-text>{{ text }}</v-card-text>
-                </v-card>
-            </v-tab-item>
-            </v-tabs>
-
-            <div class="text-xs-center mt-3">
-            <v-btn @click="next">next tab</v-btn>
+  <v-app id="eventos">
+       <div class="contenedor">
+           <div class="boton-crear">
+               <v-dialog v-model="dialog" persistent>
+                    <template v-slot:activator="{ on }">
+                        <div><v-btn large round color="secondary" class="boton" dark v-on="on" >Crear evento<v-icon>add</v-icon></v-btn></div>
+                    </template>
+                        <v-card>
+                            <v-container>
+                            <div><h2>Programar regadero</h2></div>
+                            <div class="contenedor-modal">
+                                <div class="fecha-picker">
+                                    <v-date-picker
+                                    v-model="date"
+                                    full-width
+                                    landscape
+                                    class="mt-3"
+                                    color="primary"
+                                ></v-date-picker>
+                                </div> 
+                                 <div class="tiempo-picker">
+                                     <v-time-picker
+                                v-model="time"
+                                full-width
+                                landscape
+                                type="month"
+                                class="mt-3"
+                                color="primary"
+                                ></v-time-picker>
+                                 </div>
+                            </div>
+                        </v-container>
+                        <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="secondary" flat @click="dialog = false">Close</v-btn>
+                        <v-btn color="secondary" flat @click="guardar()">Save</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                    </v-dialog>
             </div>
+           <div class="lista">
+             <v-timeline>
+              <v-slide-x-transition
+                group
+              >
+                <div >
+                  
+                </div>
+                <v-timeline-item
+                  v-for="event in events"
+                  :key="event.id"
+                  class="mb-4"
+                  color="slight"
+                  icon="local_drink"
+                  fill-dot
+                >
+                    <v-card class="elevation-2">
+                      <v-card-text>
+                        <v-flex><strong>{{event.time}}</strong></v-flex>
+                        <v-flex v-text="event.date"></v-flex>
+                      </v-card-text>
+                    </v-card>
+                </v-timeline-item>
+              </v-slide-x-transition>
+              </v-timeline>
+           </div>
+          <div>
+            <v-snackbar
+              v-model="snackbar"
+              :bottom="y === 'bottom'"
+              :left="x === 'left'"
+              :multi-line="mode === 'multi-line'"
+              :right="x === 'right'"
+              :timeout="timeout"
+              :top="y === 'top'"
+              :vertical="mode === 'vertical'"
+            >
+              {{ text }}
+              <v-btn
+                color="plight"
+                flat
+                @click="snackbar = false"
+              >
+                Close
+              </v-btn>
+            </v-snackbar>
+          </div>
         </div>
   </v-app>
 </template>
+<style>
+.contenedor{
+    display: flex;
+    flex-direction: column;
+}
+.boton-crear{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 2.5%;
+    margin-right: 2.5%;
+}
+.lista{
+    /* padding: 5%;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+    background-color: white; */
+    margin-top: 2.5%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.contenedor-modal{
+    display: flex;
+    flex-direction:row-reverse;
+
+}
+.tiempo-picker{
+    width: 50%;
+    margin: 2%;
+}
+.fecha-picker{
+    width: 50%;
+    margin: 2%;
+}
+</style>
+<script>
+import { API } from '../services/axios';
+  export default {
+    data () {
+      return {
+        snackbar: false,
+        y: 'bottom',
+        x: null,
+        mode: '',
+        timeout: 6000,
+        text: 'Evento de riego agregado.',
+        time: new Date().getHours().toString() +':'+new Date().getMinutes().toString(),
+        date: new Date().toISOString().substr(0, 10),
+        dialog: false,
+        events:[],
+      }
+    },
+    mounted () {
+      API.get('evento/').then(response=>{
+        this.events=response.data.slice().reverse();
+      });
+      
+    },
+    methods:{
+        guardar(){
+          const tiempo = (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)","")
+
+          API.post('evento/',{
+            date: this.date,
+            time: tiempo,          
+          }).then(()=>{
+              this.dialog=false;
+              API.get('evento/').then(response=>{
+                this.events=response.data.slice().reverse();
+                this.snackbar = true;
+              });
+          })
+          
+        },
+        editar(id){
+
+        },
+        eliminar(id){
+
+        }
+    }
+  }
+</script>

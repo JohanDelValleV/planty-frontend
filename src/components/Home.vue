@@ -7,14 +7,16 @@
         </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <div v-if="bottomNav === 'eventos'">
-      <Eventos/>
-    </div>
-    <div v-else-if="bottomNav === 'live'">
-      <Live/>
-    </div>
-    <div v-else>
-      <Estado/>
+    <div class="vista">
+        <div v-if="bottomNav === 'eventos'">
+          <Eventos/>
+        </div>
+        <div v-else-if="bottomNav === 'live'">
+          <Live/>
+        </div>
+        <div v-else>
+          <Weather/>
+        </div>
     </div>
     <v-bottom-nav
       :active.sync="bottomNav"
@@ -52,6 +54,10 @@
   </v-app>
 </template>
 <style>
+  .vista{
+    margin-top: 50px;
+    margin-bottom: 70px;
+  }
   .titulo{
     font-family: 'Quicksand', Bold;
     color: #FFFFFF;
@@ -61,16 +67,16 @@
 <script>
   import Live from './Live'
   import Eventos from './Eventos'
-   import Estado from './Estado'
+   import Weather from './Weather'
   export default {
     components: {
       Live,
       Eventos,
-      Estado
+      Weather
     },
     data () {
       return {
-        bottomNav: 'live'
+        bottomNav: 'eventos'
       }
     }
   }
