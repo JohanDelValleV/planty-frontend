@@ -23,7 +23,7 @@
           <Eventos/>
         </div>
         <div v-else-if="bottomNav === 'live'">
-          <Estado/>
+          <Live/>
         </div>
         <div v-else>
           <Weather/>
