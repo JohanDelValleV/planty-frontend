@@ -15,7 +15,7 @@
           <Live/>
         </div>
         <div v-else>
-          <Estado/>
+          <Weather/>
         </div>
     </div>
     <v-bottom-nav
@@ -67,12 +67,12 @@
 <script>
   import Live from './Live'
   import Eventos from './Eventos'
-   import Estado from './Estado'
+   import Weather from './Weather'
   export default {
     components: {
       Live,
       Eventos,
-      Estado
+      Weather
     },
     data () {
       return {
