@@ -4,7 +4,7 @@
            <div class="boton-crear">
                <v-dialog v-model="dialog" persistent>
                     <template v-slot:activator="{ on }">
-                        <div><v-btn large round color="secondary" class="boton" dark v-on="on" >Crear evento<v-icon>add</v-icon></v-btn></div>
+                        <div><v-btn large round color="secondary" class="boton" dark v-on="on" >Añadir riego<v-icon>add</v-icon></v-btn></div>
                     </template>
                         <v-card>
                             <v-container>
@@ -40,28 +40,44 @@
                     </v-dialog>
             </div>
            <div class="lista">
-             <v-timeline>
+             <v-timeline dense align-top>
               <v-slide-x-transition
                 group
               >
-                <div >
+                <div v-for="event in events" :key="event.id">
+                  <div v-if="event.status==true">
+                    <v-timeline-item
+                    :key="event.id"
+                    class="mx-auto"
+                    color="sdark"
+                    icon="done"
+                    fill-dot
+                  >
+                      <v-card class="elevation-2">
+                        <v-card-text>
+                          <v-flex><strong>{{event.time}}</strong></v-flex>
+                          <v-flex v-text="event.date"></v-flex>
+                        </v-card-text>
+                      </v-card>
+                  </v-timeline-item>
+                  </div>
+                  <div v-else>
+                    <v-timeline-item
+                    class="mb-auto"
+                    color="slight"
+                    icon="schedule"
+                    fill-dot
+                  >
+                      <v-card class="elevation-2">
+                        <v-card-text>
+                          <v-flex><strong>{{event.time}}</strong></v-flex>
+                          <v-flex v-text="event.date"></v-flex>
+                        </v-card-text>
+                      </v-card>
+                  </v-timeline-item>
+                  </div>
                   
                 </div>
-                <v-timeline-item
-                  v-for="event in events"
-                  :key="event.id"
-                  class="mb-4"
-                  color="slight"
-                  icon="local_drink"
-                  fill-dot
-                >
-                    <v-card class="elevation-2">
-                      <v-card-text>
-                        <v-flex><strong>{{event.time}}</strong></v-flex>
-                        <v-flex v-text="event.date"></v-flex>
-                      </v-card-text>
-                    </v-card>
-                </v-timeline-item>
               </v-slide-x-transition>
               </v-timeline>
            </div>
@@ -106,8 +122,8 @@
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
     background-color: white; */
     margin-top: 2.5%;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 30%;
+    margin-right: 30%;
 }
 .contenedor-modal{
     display: flex;

@@ -29,8 +29,8 @@
         flat
         value="eventos"
       >
-        <span>Eventos</span>
-        <v-icon>today</v-icon>
+        <span>Riegos</span>
+        <v-icon>local_drink</v-icon>
       </v-btn>
 
       <v-btn
