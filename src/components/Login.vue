@@ -6,7 +6,9 @@
                     <v-card max-height="auto" max-width="auto" class="borde">
                         <v-card-title>
                             <div>
-                                <h3 class="headline mb-0">Login</h3>
+                                <v-icon color="primary">local_florist</v-icon>
+                                    <span class="titulo"><strong>planty</strong></span>
+                                </v-toolbar-title>
                             </div>
                         </v-card-title>
                         <v-card-text>
@@ -14,7 +16,7 @@
                             <v-text-field outline prepend-inner-icon="person" name="Username" label="Username" clearable primary></v-text-field>
                             <v-text-field outline prepend-inner-icon="lock" name="Password" label="Password" type="password" primary></v-text-field>
                             <v-card-actions>
-                                <v-btn large block color="secondary" to="/home">Login</v-btn>
+                                <v-btn large depressed block dark color="plight" to="/home" class="button">Login</v-btn>
                             </v-card-actions>
                         </v-form>
                         </v-card-text>
@@ -32,13 +34,25 @@ export default {
 </script>
 
 <style scoped>
+    .titulo{
+        font-family: 'Quicksand', Bold;
+        color: #00c853;
+        font-size: 500%;
+    }
     .container {
-        margin-top: 5%;
+        margin-top: -1%;
     }
     .borde {
         border-radius: 5px;
+        padding-top: 10%;
+        padding-bottom: 10%;
+        padding-left: 25%;
+        padding-right: 25%;
+    }
+    .button{
+        border-radius: 5px;
     }
     .background {
-        background-image: url(../assets/background.jpg);
+        background-color: #EEEEEE;
     }
 </style>
