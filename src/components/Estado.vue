@@ -1,27 +1,40 @@
-
 <template>
-  <v-app>
-      <v-layout>
-            <v-flex xs12 sm6 offset-sm3>
-            <v-card>
-                <v-img
-                src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-                aspect-ratio="2.75"
-                ></v-img>
-
-                <v-card-title primary-title>
-                <div>
-                    <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                    <div> {{ card_text }} </div>
-                </div>
-                </v-card-title>
-
-                <v-card-actions>
-                <v-btn flat color="orange">Share</v-btn>
-                <v-btn flat color="orange">Explore</v-btn>
-                </v-card-actions>
-            </v-card>
-            </v-flex>
-        </v-layout>
-  </v-app>
+  <div id="lateral">+
+        <v-tabs v-model="tabs">
+          <v-tab href="#one"></v-tab>
+        </v-tabs>
+    <v-fab-transition>
+      <v-btn
+        :key="activeFab.icon"
+        v-model="fab"
+        color="primary"
+        dark
+        fab
+        fixed
+        bottom
+        left
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
+    </v-fab-transition>
+  </div>
 </template>
+<script>
+  export default {
+    data: () => ({
+      fab: false,
+      hidden: false,
+      tabs: null
+    }),
+
+    computed: {
+      activeFab () {
+        switch (this.tabs) {
+          case 'one': return { icon: 'add' }
+          default: return {}
+        }
+
+      }
+    }
+  }
+</script>

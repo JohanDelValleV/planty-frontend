@@ -5,14 +5,25 @@
         <v-icon color="white">local_florist</v-icon>
             <span class="titulo"><strong>planty</strong></span>
         </v-toolbar-title>
-      <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn icon
+            v-on="on">
+              <v-icon  color="white">arrow_drop_down</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+              <v-btn flat v-on:click="salir()">Cerrar sesión</v-btn>
+          </v-list>
+        </v-menu>
     </v-toolbar>
     <div class="vista">
         <div v-if="bottomNav === 'eventos'">
           <Eventos/>
         </div>
         <div v-else-if="bottomNav === 'live'">
-          <Live/>
+          <Estado/>
         </div>
         <div v-else>
           <Weather/>
@@ -29,8 +40,8 @@
         flat
         value="eventos"
       >
-        <span>Eventos</span>
-        <v-icon>today</v-icon>
+        <span>Riegos</span>
+        <v-icon>local_drink</v-icon>
       </v-btn>
 
       <v-btn
@@ -67,16 +78,23 @@
 <script>
   import Live from './Live'
   import Eventos from './Eventos'
-   import Weather from './Weather'
+  import Weather from './Weather'
+  import Estado from './Estado'
   export default {
     components: {
       Live,
       Eventos,
-      Weather
+      Weather,
+      Estado
     },
     data () {
       return {
         bottomNav: 'eventos'
+      }
+    },
+    methods:{
+      salir(){
+        this.$router.replace('login')
       }
     }
   }

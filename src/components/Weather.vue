@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <div class="container">
-            <v-flex  sm4 offset-sm8>
+            <v-flex  sm4 offset-sm8 transition="slide-y-reverse-transition">
                 <v-card class="card">
                     <v-layout>
                         <div class="container">
