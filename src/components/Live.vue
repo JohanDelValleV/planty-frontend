@@ -26,8 +26,10 @@
 </template>
 
 <script>
+    import Ws from '@adonisjs/websocket-client';
     import io from 'socket.io-client';
     import $ from 'jquery';
+    const ws = Ws('ws://localhost:3333');
     export default {
         data() {
             return {
@@ -38,7 +40,21 @@
                 mode: '',
                 timeout: 4000,
                 text: '',
+                riego: null,
             }
+        },
+        async created(){
+            this.inicializeriegows();
+            },
+        methods: {
+            inicializeRiegows: async function(){
+                ws.connect();
+                this.riego = ws.subscribe('riego')
+                let riego = this.riego;
+                riego.on('ready', ()=> {
+                    this.riego.emit('message', 'Hola')
+                })
+            },
         },
         mounted(){
             this.socket.on('stream', (image) => {
