@@ -12,7 +12,6 @@
                     bottom
                     right
                     fixed
-                    v-model="fab"
                     v-on="on" 
                     fab
                   >
@@ -164,6 +163,7 @@ import { API } from '../services/axios';
         y: 'bottom',
         x: null,
         timeout: 6000,
+        mode: '',
         text: 'Evento de riego agregado.',
         time: new Date().getHours().toString() +':'+new Date().getMinutes().toString(),
         date: new Date().toISOString().substr(0, 10),
