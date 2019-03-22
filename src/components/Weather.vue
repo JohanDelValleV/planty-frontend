@@ -6,7 +6,8 @@
                     <v-layout>
                         <div class="container">
                             <div v-bind:location="location" class="location"> {{ location }} </div>
-                            <div v-bind:localTime="localTime" style="color:#878787; font-size:15px;"> {{ localTime }} </div>
+                            <div v-bind:localTime="localTime" style="color:#878787; font-size:15px;"> {{now}} </div>
+                            <div v-bind:localTime="localTime" style="color:#878787; font-size:15px;"> {{ time }} </div>
                             <div v-bind:condition="condition" style="color:#878787; font-size:15px;"> {{ condition }} </div>
                             <div>
                                 <v-img :src="img" contain style="float:left;height:64px;width:64px"></v-img> 
@@ -56,6 +57,23 @@
                     this.localTime = response.data.location.localtime;
                     this.viento = response.data.current.wind_kph;
                 });
+            },
+        },
+        computed: {
+            now: function(){
+                var day = new Date()
+                var weekday = new Array(7)
+                weekday[0] = "Domingo";
+                weekday[1] = "Lunes";
+                weekday[2] = "Martes";
+                weekday[3] = "Miercoles";
+                weekday[4] = "Jueves";
+                weekday[5] = "Viernes";
+                weekday[6] = "Sabado"
+                return weekday[day.getDay()]
+            },
+            time: function(){
+                return new Date().getSeconds()
             },
         },
         mounted: function(){
