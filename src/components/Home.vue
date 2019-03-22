@@ -55,7 +55,8 @@
 </template>
 <style>
   .vista{
-    margin-top: 5%
+    margin-top: 50px;
+    margin-bottom: 70px;
   }
   .titulo{
     font-family: 'Quicksand', Bold;

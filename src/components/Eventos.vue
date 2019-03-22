@@ -2,7 +2,6 @@
   <v-app id="eventos">
        <div class="contenedor">
            <div class="boton-crear">
-               
                <v-dialog v-model="dialog" persistent>
                     <template v-slot:activator="{ on }">
                         <div><v-btn large round color="secondary" class="boton" dark v-on="on" >Crear evento<v-icon>add</v-icon></v-btn></div>
@@ -41,6 +40,30 @@
                     </v-dialog>
             </div>
            <div class="lista">
+             <v-timeline>
+              <v-slide-x-transition
+                group
+              >
+                <div >
+                  
+                </div>
+                <v-timeline-item
+                  v-for="event in events"
+                  :key="event.id"
+                  class="mb-4"
+                  color="slight"
+                  icon="local_drink"
+                  fill-dot
+                >
+                    <v-card class="elevation-2">
+                      <v-card-text>
+                        <v-flex><strong>{{event.time}}</strong></v-flex>
+                        <v-flex v-text="event.date"></v-flex>
+                      </v-card-text>
+                    </v-card>
+                </v-timeline-item>
+              </v-slide-x-transition>
+              </v-timeline>
            </div>
         </div>
   </v-app>
@@ -57,6 +80,10 @@
     margin-right: 2.5%;
 }
 .lista{
+    /* padding: 5%;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+    background-color: white; */
     margin-top: 2.5%;
     margin-left: 10%;
     margin-right: 10%;
@@ -76,39 +103,38 @@
 }
 </style>
 <script>
+import { API } from '../services/axios';
   export default {
     data () {
       return {
         time: new Date().getHours().toString() +':'+new Date().getMinutes().toString(),
         date: new Date().toISOString().substr(0, 10),
         dialog: false,
-        items: [
-          { header: 'Today' },
-          {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-            title: 'Brunch this weekend?',
-            subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-          },
-          { divider: true, inset: true },
-          {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-            title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-            subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
-          },
-          { divider: true, inset: true },
-          {
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-            title: 'Oui oui',
-            subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
-          }
-        ]
+        events:[],
       }
+    },
+    mounted () {
+      API.get('evento/').then(response=>{
+        this.events=response.data.slice().reverse();
+      });
+      
     },
     methods:{
         guardar(){
-            this.dialog=false;
-            console.log(this.time)
-            console.log(this.date)
+          const tiempo = (new Date()).toTimeString().replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
+            return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
+          })
+
+          API.post('evento/',{
+            date: this.date,
+            time: tiempo,          
+          }).then(()=>{
+              this.dialog=false;
+              API.get('evento/').then(response=>{
+                this.events=response.data.slice().reverse();
+              });
+          })
+          
         },
         editar(id){
 
