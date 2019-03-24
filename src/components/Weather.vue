@@ -23,9 +23,6 @@
                             </div>
                         </div>
                     </v-layout>
-                    <!-- <v-card-actions>
-                        <v-btn flat color="orange" @click="getWeather()">Reload</v-btn>
-                    </v-card-actions> -->
                 </v-card>
             </v-flex>
         </div>

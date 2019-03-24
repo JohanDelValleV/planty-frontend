@@ -85,7 +85,7 @@
       Live,
       Eventos,
       Weather,
-      Estado
+      Estado,
     },
     data () {
       return {
