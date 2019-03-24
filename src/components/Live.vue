@@ -27,13 +27,11 @@
 
 <script>
     import Ws from '@adonisjs/websocket-client';
-    // import io from 'socket.io-client';
     import $ from 'jquery';
     const ws = Ws('ws://192.168.43.99:3333');
     export default {
         data() {
             return {
-                // socket : io('LAPTOP-LESS:3001'),
                 snackbar: false,
                 y: 'bottom',
                 x: null,
@@ -43,24 +41,22 @@
                 riego: null,
             }
         },
-        async created(){
-            this.inicializeriegows();
-            },
         methods: {
             inicializeRiegows: async function(){
                 ws.connect();
                 this.riego = ws.subscribe('riego')
                 let riego = this.riego;
                 riego.on('ready', ()=> {
-                  riego.emit('riego', 'Hola')  
+                    this.riego.emit('riego', 'Hola')
                 })
                 // this.riego.emit('riego', 'Hola')
             },
         },
         mounted(){
-            this.socket.on('stream', (image) => {
-               $('#play').attr('src',image);
-            });
+            // this.socket.on('stream', (image) => {
+            //    $('#play').attr('src',image);
+            // });
+            this.inicializeRiegows();
         }
     }
 </script>
