@@ -1,7 +1,7 @@
 <template>
     <v-app>
-        <div class="container">
-            <v-flex  sm4 offset-sm8>
+        <div class="concuchara">
+            <v-flex sm4 offset-sm1>
                 <v-card class="card">
                     <v-layout>
                         <div class="container">
@@ -23,9 +23,27 @@
                             </div>
                         </div>
                     </v-layout>
-                    <!-- <v-card-actions>
-                        <v-btn flat color="orange" @click="getWeather()">Reload</v-btn>
-                    </v-card-actions> -->
+                </v-card>
+            </v-flex>
+            <v-flex sm4 offset-sm2>
+                <v-card class="card">
+                    <v-layout>
+                        <div class="container">
+                            <div class="text">Status</div>
+                            <div>
+                                <v-icon color="primary" style="float:left;height:64px;width:64px">local_florist</v-icon>
+                                <div class="status-container" aria-level="3" role="heading">
+                                    <span class="status">40</span>
+                                    <div style="float:left;font-size:16px;margin-top:6px;" color="#212121">
+                                        <span>°C</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="data">
+                                <div>Humedad: <span>30%</span></div>
+                            </div>
+                        </div>
+                    </v-layout>
                 </v-card>
             </v-flex>
         </div>
@@ -109,4 +127,34 @@
     animation: loader 1s infinite;
     display: flex;
   }
+  .text {
+        font-family: arial, sans-serif;
+        font-size: x-large;
+        color: #878787 !important;
+    }
+    .status-container {
+        padding-left: 10px;
+        float: left;
+        color: #212121 !important;
+    }
+    .status {
+        float: left;
+        margin-top: 2px;
+        font-size: 32px
+    }
+    .data {
+        color: #878787 !important;
+        font-size: 15px;
+        padding-right: 30px;
+        line-height: 22px;
+        float: right;
+        margin-top: 2px;
+        padding-top: 2px;
+        min-width: 43%;  
+    }
+    .concuchara{
+        margin-top: 2%;
+        display: flex;
+        flex-direction: row;
+    }
 </style>

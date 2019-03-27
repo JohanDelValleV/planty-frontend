@@ -28,7 +28,7 @@
 <script>
     import Ws from '@adonisjs/websocket-client';
     import $ from 'jquery';
-    const ws = Ws('ws://localhost:3333');
+    const ws = Ws('ws://192.168.43.99:3333');
     export default {
         data() {
             return {
@@ -53,6 +53,7 @@
                     this.riego.emit('riego', 'Hola')
                     console.log(data)
                 })
+                // this.riego.emit('riego', 'Hola')
             },
         },
         mounted(){
