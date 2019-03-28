@@ -28,13 +28,15 @@
               <div><h2>Programar regadero</h2></div>
               <div class="contenedor-modal">
                 <div class="fecha-picker">
-                    <v-date-picker
-                    v-model="date"
-                    full-width
-                    landscape
-                    class="mt-3"
-                    color="primary"
-                ></v-date-picker>
+                    <br><br><br><br><br>
+                    <v-flex xs12>
+                      <v-text-field
+                        v-model="date"
+                        label="Cada cuantos dias se regará"
+                        outline
+                        suffix="dias"
+                      ></v-text-field>
+                    </v-flex>
               </div> 
               <div class="tiempo-picker">
                 <v-time-picker
@@ -88,8 +90,16 @@
                 >
                   <v-card class="elevation-2">
                     <v-card-text>
-                      <v-flex><strong>{{event.time}}</strong></v-flex>
-                      <v-flex v-text="event.date"></v-flex>
+                      <div class="tarjeta">
+                        <div>
+                          <v-flex><strong>Se regará cada {{event.date}} dias</strong></v-flex>
+                          <v-flex v-text="event.time"></v-flex>
+                        </div>
+                        <v-spacer></v-spacer>
+                        <div>
+                          <v-btn fab small flat @click="eliminar(event.id)" color="grey"><v-icon>delete</v-icon></v-btn>
+                        </div>
+                      </div>
                     </v-card-text>
                   </v-card>
                 </v-timeline-item>
@@ -149,6 +159,10 @@
     width: 50%;
     margin: 2%;
 }
+.tarjeta{
+  display: flex;
+  flex-direction:row;
+}
   #lateral .v-btn--floating {
     margin-bottom: 60px;
     margin-right: 10px;
@@ -164,9 +178,9 @@ import { API } from '../services/axios';
         x: null,
         timeout: 6000,
         mode: '',
-        text: 'Evento de riego agregado.',
-        time: new Date().getHours().toString() +':'+new Date().getMinutes().toString(),
-        date: new Date().toISOString().substr(0, 10),
+        text: '',
+        time: '',
+        date: '',
         dialog: false,
         events:[],
       }
@@ -182,26 +196,34 @@ import { API } from '../services/axios';
         this.offsetTop = e.target.scrollTop
       },
         guardar(){
-          const tiempo = (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)","")
+          //const tiempo = (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)","")
 
           API.post('evento/',{
             date: this.date,
-            time: tiempo,          
+            time: this.time,          
           }).then(()=>{
               this.dialog=false;
               API.get('evento/').then(response=>{
                 this.events=response.data.slice().reverse();
+                this.text='Evento de riego agregado.';
                 this.snackbar = true;
               });
           })
           
         },
-        // editar(id){
-
-        // },
-        // eliminar(id){
-
-        // }
+        eliminar(id){
+         API({
+              method:'delete',
+              url:('evento/').concat(id),
+          }).then(()=>{
+              this.dialog=false;
+              API.get('evento/').then(response=>{
+                this.events=response.data.slice().reverse();
+                this.text='Evento de riego eliminado.';
+                this.snackbar = true;
+              });
+          })
+        }
     }
   }
 </script>

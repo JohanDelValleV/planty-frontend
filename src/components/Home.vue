@@ -79,13 +79,11 @@
   import Live from './Live'
   import Eventos from './Eventos'
   import Weather from './Weather'
-  import Estado from './Estado'
   export default {
     components: {
       Live,
       Eventos,
       Weather,
-      Estado,
     },
     data () {
       return {

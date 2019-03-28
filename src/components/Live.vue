@@ -44,8 +44,12 @@
                 ws.connect();
                 this.riego = ws.subscribe('riego')
                 let riego = this.riego;
-                riego.on('ready', ()=> {
+                riego.on('riegos',(data)=>{
+                    console.log(data)
+                })
+                riego.on('ready', (data)=> {
                     this.riego.emit('riego', 'Hola')
+                    console.log(data)
                 })
                 // this.riego.emit('riego', 'Hola')
             },
