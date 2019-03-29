@@ -1,11 +1,11 @@
 <template>
-  <v-app id="eventos">
+  <v-app>
     <div id="lateral" href="#one">
       <v-dialog v-model="dialog" persistent>
           <template v-slot:activator="{ on }">
-            <v-layout >
+            <v-layout>
               <div>
-                <v-fab-transition >
+                <v-fab-transition>
                   <v-btn
                     color="primary"
                     dark  
@@ -60,7 +60,16 @@
           </v-card>
         </v-dialog>
       </div>
-      <div class="contenedor">
+      <v-layout>
+        <v-flex sm2 offset-sm1>
+          <v-card class="card">
+            <div class="container">
+              <div v-bind:time="time" style="color:#878787; font-size:15px;">Local time: <span>{{time}}</span></div>
+            </div>
+          </v-card>
+        </v-flex>
+      </v-layout>
+        <div class="contenedor">
         <div class="lista">
           <v-timeline dense align-top >
             <v-slide-x-transition
@@ -134,6 +143,7 @@
     </div>
   </v-app>
 </template>
+
 <style>
 .contenedor{
     display: flex;
@@ -168,6 +178,11 @@
   #lateral .v-btn--floating {
     margin-bottom: 60px;
     margin-right: 10px;
+  }
+  .card {
+    border: 1px solid #878787;
+    border-radius: 8px;
+    box-shadow: none;
   }
 </style>
 <script>
@@ -225,7 +240,19 @@ import { API } from '../services/axios';
                 this.snackbar = true;
               });
           })
+        },
+        localTime: function(){
+          var day = new Date()
+          var hour = day.getHours();
+          var minute = day.getMinutes();
+          this.time= hour+':'+minute;
         }
+    },
+    created: function(){
+      this.localTime();
+      setInterval(function(){
+        this.localTime();
+      }.bind(this), 5000);
     }
   }
 </script>

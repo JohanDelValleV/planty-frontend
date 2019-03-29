@@ -6,7 +6,7 @@
                     <v-layout>
                         <div class="container">
                             <div v-bind:location="location" class="location"> {{ location }} </div>
-                            <div v-bind:localTime="localTime" style="color:#878787; font-size:15px;"> {{now}} </div>
+                            <div style="color:#878787; font-size:15px;"> {{now}} </div>
                             <div v-bind:condition="condition" style="color:#878787; font-size:15px;"> {{ condition }} </div>
                             <div>
                                 <v-img :src="img" contain style="float:left;height:64px;width:64px"></v-img> 
@@ -40,6 +40,7 @@
                                 </div>
                             </div>
                             <div class="data">
+                                <div v-bind:time="time" style="color:#878787; font-size:15px;">Local time: <span>{{time}}</span></div>
                                 <div>Humedad: <span>30%</span></div>
                             </div>
                         </div>
@@ -61,11 +62,26 @@
             img: '',
             humidity: String,
             condition: String,
-            localTime: String,
             viento: String,
+            time: '',
         }),
         methods: {
-
+            getWeather: async function(){
+                await WEATHER.get().then(response => {
+                    this.clima = response.data.current.temp_c;
+                    this.img = response.data.current.condition.icon;
+                    this.location = response.data.location.name + ', ' + response.data.location.region;
+                    this.humidity = response.data.current.humidity;
+                    this.condition = response.data.current.condition.text;
+                    this.viento = response.data.current.wind_kph;
+                });
+            },
+            localTime: function(){
+                var day = new Date()
+                var hour = day.getHours();
+                var minute = day.getMinutes();
+                this.time= hour+':'+minute;
+            }
         },
         computed: {
             now: function(){
@@ -79,15 +95,16 @@
             
         },
         mounted: async function(){
-            await WEATHER.get().then(response => {
-                this.clima = response.data.current.temp_c;
-                this.img = response.data.current.condition.icon;
-                this.location = response.data.location.name + ', ' + response.data.location.region;
-                this.humidity = response.data.current.humidity;
-                this.condition = response.data.current.condition.text;
-                this.localTime = response.data.location.localtime;
-                this.viento = response.data.current.wind_kph;
-            });
+            await this.getWeather();
+            setInterval(function(){
+                this.getWeather();
+            }.bind(this), 30000);
+        },
+        created: function(){
+            this.localTime();
+            setInterval(function(){
+                this.localTime();
+            }.bind(this), 5000);
         }
     }
 </script>
