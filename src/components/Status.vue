@@ -63,18 +63,16 @@
 import io from 'socket.io-client';
 export default {
     data: () => ({
-        socket : io('127.0.0.1:3030'),
+        socket : io('157.230.169.186:3030'),
         temp: String,
         hum: String,
     }),
     mounted(){
         this.socket.on('temperatura', (t) => {
             this.temp=t;
-            console.log(t)
         });
         this.socket.on('humedad', (h) => {
             this.hum=h;
-            console.log(h)
         });
     }
 }

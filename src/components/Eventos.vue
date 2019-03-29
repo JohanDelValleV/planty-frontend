@@ -211,19 +211,19 @@ import { API } from '../services/axios';
       
     },
     methods:{
-      inicializeRiegows: async function(){
-          ws.connect();
-          this.riego = ws.subscribe('riego')
-          // let riego = this.riego;
-          // riego.on('riegos',(data)=>{
-          //     console.log(data)
-          // })
-          // riego.on('ready', (data)=> {
-          //     this.riego.emit('riego', 'Hola')
-          //     console.log(data)
-          // })
-          // this.riego.emit('riego', 'Hola')
-      },
+      // inicializeRiegows: async function(){
+      //     ws.connect();
+      //     this.riego = ws.subscribe('riego')
+      //     // let riego = this.riego;
+      //     // riego.on('riegos',(data)=>{
+      //     //     console.log(data)
+      //     // })
+      //     // riego.on('ready', (data)=> {
+      //     //     this.riego.emit('riego', 'Hola')
+      //     //     console.log(data)
+      //     // })
+      //     // this.riego.emit('riego', 'Hola')
+      // },
       onScroll (e) {
         this.offsetTop = e.target.scrollTop
       },
@@ -262,11 +262,11 @@ import { API } from '../services/axios';
           this.dialog=false;
         }
     },
-      mounted(){
-          // this.socket.on('stream', (image) => {
-          //    $('#play').attr('src',image);
-          // });
-          // this.inicializeRiegows();
-      }
+      // mounted(){
+      //     // this.socket.on('stream', (image) => {
+      //     //    $('#play').attr('src',image);
+      //     // });
+      //     // this.inicializeRiegows();
+      // }
   }
 </script>

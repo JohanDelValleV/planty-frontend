@@ -24,9 +24,9 @@
 </template>
 
 <script>
-    import Ws from '@adonisjs/websocket-client';
-    import $ from 'jquery';
-    const ws = Ws('ws://157.230.169.186:3333');
+    // import Ws from '@adonisjs/websocket-client';
+    // import $ from 'jquery';
+    // const ws = Ws('ws://157.230.169.186:3333');
     export default {
         data() {
             return {
@@ -40,19 +40,19 @@
             }
         },
         methods: {
-            inicializeRiegows: async function(){
-                ws.connect();
-                this.riego = ws.subscribe('riego')
-                let riego = this.riego;
-                riego.on('riegos',(data)=>{
-                    console.log(data)
-                })
-                riego.on('ready', (data)=> {
-                    this.riego.emit('riego', 'Hola')
-                    console.log(data)
-                })
-                // this.riego.emit('riego', 'Hola')
-            },
+            // inicializeRiegows: async function(){
+            //     ws.connect();
+            //     this.riego = ws.subscribe('riego')
+            //     let riego = this.riego;
+            //     riego.on('riegos',(data)=>{
+            //         console.log(data)
+            //     })
+            //     riego.on('ready', (data)=> {
+            //         this.riego.emit('riego', 'Hola')
+            //         console.log(data)
+            //     })
+            //     // this.riego.emit('riego', 'Hola')
+            // },
         },
         mounted(){
             // this.socket.on('stream', (image) => {
