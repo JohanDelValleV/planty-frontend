@@ -19,9 +19,7 @@
                 Close
             </v-btn>
         </v-snackbar>
-        <div style="max-width: 700px; margin: auto;">
-            <img id="play" width="700px">
-        </div>
+            <v-flex><img id="play"></v-flex>
     </v-app>
 </template>
 
