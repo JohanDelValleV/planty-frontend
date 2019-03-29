@@ -26,7 +26,7 @@
 <script>
     import Ws from '@adonisjs/websocket-client';
     import $ from 'jquery';
-    const ws = Ws('ws://192.168.43.99:3333');
+    const ws = Ws('ws://157.230.169.186:3333');
     export default {
         data() {
             return {

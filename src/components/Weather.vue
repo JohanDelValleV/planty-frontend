@@ -33,14 +33,14 @@
                             <div>
                                 <v-icon color="primary" style="float:left;height:64px;width:64px">local_florist</v-icon>
                                 <div class="status-container" aria-level="3" role="heading">
-                                    <span class="status">40</span>
+                                    <span class="status" v-bind:temp="temp">{{temp}}</span>
                                     <div style="float:left;font-size:16px;margin-top:6px;" color="#212121">
                                         <span>°C</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="data">
-                                <div>Humedad: <span>30%</span></div>
+                                <div>Humedad: <span v-bind:hum="hum">{{hum}}</span></div>
                             </div>
                         </div>
                     </v-layout>
@@ -52,9 +52,11 @@
 
 <script>
     import { WEATHER } from '../services/weather';
+    import io from 'socket.io-client';
     export default {
         name: 'Weather',
         data: () => ({
+            socket : io('192.168.1.28:3030'),
             clima: String,
             location: String,
             img: String,
@@ -62,6 +64,8 @@
             condition: String,
             localTime: String,
             viento: String,
+            temp: String,
+            hum: String,
         }),
         methods: {
             getWeather(){
@@ -88,6 +92,12 @@
             WEATHER.get().then(() => {
                 this.getWeather();
             })
+            this.socket.on('temperatura', (t) => {
+            this.temp=t;
+            });
+            this.socket.on('humedad', (h) => {
+                this.hum=h;
+            });
         }
     }
 </script>

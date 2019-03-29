@@ -63,7 +63,7 @@
 import io from 'socket.io-client';
 export default {
     data: () => ({
-        socket : io('192.168.1.28:3030'),
+        socket : io('127.0.0.1:3030'),
         temp: String,
         hum: String,
     }),

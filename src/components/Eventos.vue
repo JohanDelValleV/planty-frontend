@@ -169,17 +169,19 @@
   }
 </style>
 <script>
+import io from 'socket.io-client';
 import { API } from '../services/axios';
   export default {
     data () {
       return {
+        socket : io('157.230.169.186:4040'),
         snackbar: false,
         y: 'bottom',
         x: null,
         timeout: 6000,
         mode: '',
         text: '',
-        time: '',
+        time: (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)",""),
         date: '',
         dialog: false,
         events:[],
@@ -192,12 +194,28 @@ import { API } from '../services/axios';
       
     },
     methods:{
+      inicializeRiegows: async function(){
+          ws.connect();
+          this.riego = ws.subscribe('riego')
+          // let riego = this.riego;
+          // riego.on('riegos',(data)=>{
+          //     console.log(data)
+          // })
+          // riego.on('ready', (data)=> {
+          //     this.riego.emit('riego', 'Hola')
+          //     console.log(data)
+          // })
+          // this.riego.emit('riego', 'Hola')
+      },
       onScroll (e) {
         this.offsetTop = e.target.scrollTop
       },
         guardar(){
           //const tiempo = (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)","")
-
+    
+  
+          this.socket.emit('riego', {date:this.date,time:this.time})
+          this.dialog=false;
           API.post('evento/',{
             date: this.date,
             time: this.time,          
@@ -223,7 +241,15 @@ import { API } from '../services/axios';
                 this.snackbar = true;
               });
           })
+          this.socket.emit('delete', {id:id})
+          this.dialog=false;
         }
-    }
+    },
+      mounted(){
+          // this.socket.on('stream', (image) => {
+          //    $('#play').attr('src',image);
+          // });
+          // this.inicializeRiegows();
+      }
   }
 </script>
