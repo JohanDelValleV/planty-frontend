@@ -6,7 +6,7 @@
                     <v-layout>
                         <div class="container">
                             <div v-bind:location="location" class="location"> {{ location }} </div>
-                            <div v-bind:localTime="localTime" style="color:#878787; font-size:15px;"> {{now}} </div>
+                            <div style="color:#878787; font-size:15px;"> {{now}} </div>
                             <div v-bind:condition="condition" style="color:#878787; font-size:15px;"> {{ condition }} </div>
                             <div>
                                 <v-img :src="img" contain style="float:left;height:64px;width:64px"></v-img> 
@@ -59,26 +59,30 @@
             socket : io('192.168.1.28:3030'),
             clima: String,
             location: String,
-            img: String,
+            img: '',
             humidity: String,
             condition: String,
-            localTime: String,
             viento: String,
             temp: String,
             hum: String,
         }),
         methods: {
-            getWeather(){
-                WEATHER.get().then(response => {
+            getWeather: async function(){
+                await WEATHER.get().then(response => {
                     this.clima = response.data.current.temp_c;
                     this.img = response.data.current.condition.icon;
                     this.location = response.data.location.name + ', ' + response.data.location.region;
                     this.humidity = response.data.current.humidity;
                     this.condition = response.data.current.condition.text;
-                    this.localTime = response.data.location.localtime;
                     this.viento = response.data.current.wind_kph;
                 });
             },
+            localTime: function(){
+                var day = new Date()
+                var hour = day.getHours();
+                var minute = day.getMinutes();
+                this.time= hour+':'+minute;
+            }
         },
         computed: {
             now: function(){
@@ -88,8 +92,12 @@
                 return weekday[day.getDay()]
             },
         },
-        mounted: function(){
-            WEATHER.get().then(() => {
+        watch: {
+            
+        },
+        mounted: async function(){
+            await this.getWeather();
+            setInterval(function(){
                 this.getWeather();
             })
             this.socket.on('temperatura', (t) => {
