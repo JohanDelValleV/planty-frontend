@@ -1,6 +1,7 @@
 <template>
     <v-app>
         <div class="container">
+            <h1>{{temp}}</h1>
             <v-flex sm4 oofset-sm4>
                 <v-card class="card">
                     <v-layout>
@@ -9,14 +10,14 @@
                             <div>
                                 <v-icon color="primary" style="float:left;height:64px;width:64px">local_florist</v-icon>
                                 <div class="status-container" aria-level="3" role="heading">
-                                    <span class="status">40</span>
+                                    <span class="status" v-bind:temp="temp">{{temp}}</span>
                                     <div style="float:left;font-size:16px;margin-top:6px;" color="#212121">
                                         <span>°C</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="data">
-                                <div>Humedad: <span>30%</span></div>
+                                <div>Humedad: <span v-bind:hum="hum">{{hum}}</span></div>
                             </div>
                         </div>
                     </v-layout>
@@ -25,15 +26,6 @@
         </div>
     </v-app>
 </template>
-
-<script>
-    export default {
-        name: 'Status',
-        data: ()=> {
-
-        },
-    }
-</script>
 
 <style scoped>
     .card {
@@ -67,3 +59,23 @@
         min-width: 43%;  
     }
 </style>
+<script>
+import io from 'socket.io-client';
+export default {
+    data: () => ({
+        socket : io('192.168.1.28:3030'),
+        temp: String,
+        hum: String,
+    }),
+    mounted(){
+        this.socket.on('temperatura', (t) => {
+            this.temp=t;
+            console.log(t)
+        });
+        this.socket.on('humedad', (h) => {
+            this.hum=h;
+            console.log(h)
+        });
+    }
+}
+</script>
