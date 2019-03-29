@@ -35,6 +35,8 @@
                         label="Cada cuantos dias se regará"
                         outline
                         suffix="dias"
+                        type="number"
+                        clearable
                       ></v-text-field>
                     </v-flex>
               </div> 

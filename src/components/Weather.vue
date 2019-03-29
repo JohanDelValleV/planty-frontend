@@ -52,29 +52,20 @@
 
 <script>
     import { WEATHER } from '../services/weather';
+    import { setInterval } from 'timers';
     export default {
         name: 'Weather',
         data: () => ({
             clima: String,
             location: String,
-            img: String,
+            img: '',
             humidity: String,
             condition: String,
             localTime: String,
             viento: String,
         }),
         methods: {
-            getWeather(){
-                WEATHER.get().then(response => {
-                    this.clima = response.data.current.temp_c;
-                    this.img = response.data.current.condition.icon;
-                    this.location = response.data.location.name + ', ' + response.data.location.region;
-                    this.humidity = response.data.current.humidity;
-                    this.condition = response.data.current.condition.text;
-                    this.localTime = response.data.location.localtime;
-                    this.viento = response.data.current.wind_kph;
-                });
-            },
+
         },
         computed: {
             now: function(){
@@ -84,10 +75,19 @@
                 return weekday[day.getDay()]
             },
         },
-        mounted: function(){
-            WEATHER.get().then(() => {
-                this.getWeather();
-            })
+        watch: {
+            
+        },
+        mounted: async function(){
+            await WEATHER.get().then(response => {
+                this.clima = response.data.current.temp_c;
+                this.img = response.data.current.condition.icon;
+                this.location = response.data.location.name + ', ' + response.data.location.region;
+                this.humidity = response.data.current.humidity;
+                this.condition = response.data.current.condition.text;
+                this.localTime = response.data.location.localtime;
+                this.viento = response.data.current.wind_kph;
+            });
         }
     }
 </script>
