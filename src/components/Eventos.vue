@@ -240,12 +240,13 @@ import { API } from '../services/axios';
                 this.events=response.data.slice().reverse();
                 this.text='Evento de riego agregado.';
                 this.snackbar = true;
+                this.date='';
               });
           })
           
         },
         eliminar(id){
-          this.socket.emit('delete', {id:id})
+          this.socket.emit('eliminar', {id:id})
           this.dialog=false;
           API({
               method:'delete',
