@@ -229,8 +229,6 @@ import { API } from '../services/axios';
       },
         guardar(){
           //const tiempo = (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)","")
-    
-  
           this.socket.emit('riego', {date:this.date,time:this.time})
           this.dialog=false;
           API.post('evento/',{
@@ -247,7 +245,9 @@ import { API } from '../services/axios';
           
         },
         eliminar(id){
-         API({
+          this.socket.emit('delete', {id:id})
+          this.dialog=false;
+          API({
               method:'delete',
               url:('evento/').concat(id),
           }).then(()=>{
@@ -258,8 +258,6 @@ import { API } from '../services/axios';
                 this.snackbar = true;
               });
           })
-          this.socket.emit('delete', {id:id})
-          this.dialog=false;
         }
     },
       // mounted(){
