@@ -43,16 +43,6 @@
         <span>Riegos</span>
         <v-icon>local_drink</v-icon>
       </v-btn>
-
-      <v-btn
-        color="primary"
-        flat
-        value="live"
-      >
-        <span>En vivo</span>
-        <v-icon>linked_camera</v-icon>
-      </v-btn>
-
       <v-btn
         color="primary"
         flat
@@ -60,6 +50,14 @@
       >
         <span>Estado</span>
         <v-icon>wb_sunny</v-icon>
+      </v-btn>
+      <v-btn
+        color="primary"
+        flat
+        value="live"
+      >
+        <span>En vivo</span>
+        <v-icon>linked_camera</v-icon>
       </v-btn>
     </v-bottom-nav>
   </v-app>

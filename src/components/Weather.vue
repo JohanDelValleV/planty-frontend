@@ -97,9 +97,9 @@
         },
         mounted: async function(){
             await this.getWeather();
-            setInterval(function(){
-                this.getWeather();
-            })
+            // setInterval(function(){
+            //     this.getWeather();
+            // })
             this.socket.on('temperatura', (t) => {
                 this.temp=t;
             });
