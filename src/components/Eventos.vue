@@ -32,6 +32,8 @@
                     <v-flex xs12>
                       <v-text-field
                         v-model="date"
+                         :rules="[rules.validate]"
+                        @keyup.enter="guardar"
                         label="Cada cuantos dias se regará"
                         outline
                         suffix="dias"
@@ -202,6 +204,9 @@ import { API } from '../services/axios';
         date: '*',
         dialog: false,
         events:[],
+        rules:{
+          validate: value => !!value || 'Ingrese un número válido.'
+        }
       }
     },
     mounted () {
