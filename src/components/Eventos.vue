@@ -246,7 +246,7 @@ import { API } from '../services/axios';
           
         },
         eliminar(id){
-          this.socket.emit('eliminar', {id:'2'})
+          this.socket.emit('eliminar', {id:id})
           API({
               method:'delete',
               url:('evento/').concat(id),
