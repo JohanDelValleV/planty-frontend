@@ -87,7 +87,7 @@
     },
     data () {
       return {
-        bottomNav: 'eventos'
+        bottomNav: 'estado'
       }
     },
     methods:{
