@@ -199,7 +199,7 @@ import { API } from '../services/axios';
         mode: '',
         text: '',
         time: (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)",""),
-        date: '',
+        date: '0',
         dialog: false,
         events:[],
       }
@@ -246,7 +246,7 @@ import { API } from '../services/axios';
           
         },
         eliminar(id){
-          this.socket.emit('eliminar', {id:id})
+          this.socket.emit('eliminar', {id:'2'})
           API({
               method:'delete',
               url:('evento/').concat(id),
