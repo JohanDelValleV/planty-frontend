@@ -57,8 +57,8 @@
         name: 'Weather',
         data: () => ({
             socket : io('157.230.169.186:3030'),
-            clima: String,
-            location: String,
+            clima: '0',
+            location: '-',
             img: '',
             humidity: '0',
             condition: '0',
