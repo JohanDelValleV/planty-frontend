@@ -63,8 +63,8 @@
             humidity: String,
             condition: String,
             viento: String,
-            temp: String,
-            hum: String,
+            temp: '0',
+            hum: '0',
         }),
         methods: {
             getWeather: async function(){

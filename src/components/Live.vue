@@ -58,7 +58,7 @@
             // this.socket.on('stream', (image) => {
             //    $('#play').attr('src',image);
             // });
-            this.inicializeRiegows();
+            // this.inicializeRiegows();
         }
     }
 </script>
