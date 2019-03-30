@@ -229,7 +229,6 @@ import { API } from '../services/axios';
       },
         guardar(){
           //const tiempo = (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)","")
-          this.socket.emit('riego', {date:this.date,time:this.time})
           this.dialog=false;
           API.post('evento/',{
             date: this.date,
@@ -241,12 +240,12 @@ import { API } from '../services/axios';
                 this.text='Evento de riego agregado.';
                 this.snackbar = true;
                 this.date='';
+                this.socket.emit('riego', {date:this.date,time:this.time})
               });
           })
           
         },
         eliminar(id){
-          this.socket.emit('eliminar', {id:id})
           API({
               method:'delete',
               url:('evento/').concat(id),
@@ -256,15 +255,15 @@ import { API } from '../services/axios';
                 this.events=response.data.slice().reverse();
                 this.text='Evento de riego eliminado.';
                 this.snackbar = true;
+                this.socket.emit('eliminar', {id:id})
               });
           })
         }
     },
-      // mounted(){
-      //     // this.socket.on('stream', (image) => {
-      //     //    $('#play').attr('src',image);
-      //     // });
-      //     // this.inicializeRiegows();
-      // }
+      mounted(){
+          this.socket.on('connect', function () {
+            console.log(':)')
+          });
+      }
   }
 </script>
