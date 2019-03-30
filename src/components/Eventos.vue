@@ -198,8 +198,8 @@ import { API } from '../services/axios';
         timeout: 6000,
         mode: '',
         text: '',
-        time: (new Date()).toTimeString().replace(" GMT-0600 (Central Standard Time)",""),
-        date: '0',
+        time: '* * *',
+        date: '*',
         dialog: false,
         events:[],
       }
