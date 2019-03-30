@@ -205,9 +205,13 @@ import { API } from '../services/axios';
       }
     },
     mounted () {
+      this.socket.on('connect', function () {
+        console.log(':)')
+      });
       API.get('evento/').then(response=>{
         this.events=response.data.slice().reverse();
       });
+      
       
     },
     methods:{
@@ -260,10 +264,5 @@ import { API } from '../services/axios';
           })
         }
     },
-      mounted(){
-          this.socket.on('connect', function () {
-            console.log(':)')
-          });
-      }
   }
 </script>
