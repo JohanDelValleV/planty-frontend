@@ -56,7 +56,7 @@
     export default {
         name: 'Weather',
         data: () => ({
-            socket : io('192.168.1.28:3030'),
+            socket : io('157.230.169.186:3030'),
             clima: String,
             location: String,
             img: '',
@@ -101,7 +101,7 @@
                 this.getWeather();
             })
             this.socket.on('temperatura', (t) => {
-            this.temp=t;
+                this.temp=t;
             });
             this.socket.on('humedad', (h) => {
                 this.hum=h;

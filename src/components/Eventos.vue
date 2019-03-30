@@ -60,7 +60,7 @@
           </v-card>
         </v-dialog>
       </div>
-      <v-layout>
+      <!-- <v-layout>
         <v-flex sm2 offset-sm1>
           <v-card class="card">
             <div class="container">
@@ -68,7 +68,7 @@
             </div>
           </v-card>
         </v-flex>
-      </v-layout>
+      </v-layout> -->
         <div class="contenedor">
         <div class="lista">
           <v-timeline dense align-top >
