@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="data">
-                                <div>Humedad: <span v-bind:hum="hum">{{hum}}%</span></div>
+                                <div>Humedad: <span v-bind:hum="hum">{{hum}}</span>%</div>
                             </div>
                         </div>
                     </v-layout>

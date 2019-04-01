@@ -19,7 +19,7 @@
                 Close
             </v-btn>
         </v-snackbar>
-            <v-flex><img id="play"></v-flex>
+            <v-flex><img id="play" src=""></v-flex>
     </v-app>
 </template>
 
