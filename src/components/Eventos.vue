@@ -200,8 +200,8 @@ import { API } from '../services/axios';
         timeout: 6000,
         mode: '',
         text: '',
-        time: '* * *',
-        date: '*',
+        time: '',
+        date: '',
         dialog: false,
         events:[],
         rules:{
