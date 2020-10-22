@@ -1,4 +1,4 @@
-# iot-project
+# This is a frontend repository for Planty, if you want to check the backend you can check it out [here](https://github.com/JohanDelValleV/planty-backend)
 
 ## Project setup
 ```
